@@ -42,6 +42,15 @@
       },
       "runtime" : {
          "requires" : {
+            "Cache::LRU" : "0",
+            "Carp" : "0",
+            "Furl" : "0",
+            "JSON::XS" : "0",
+            "Moo" : "0",
+            "Net::DNS::Lite" : "0",
+            "URI" : "0",
+            "URI::QueryParam" : "0",
+            "namespace::clean" : "0",
             "perl" : "5.008001"
          }
       },
@@ -52,6 +61,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/hondallica/p5-WebService-NextBigSound/issues"
+      },
+      "homepage" : "https://github.com/hondallica/p5-WebService-NextBigSound",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/hondallica/p5-WebService-NextBigSound.git",
+         "web" : "https://github.com/hondallica/p5-WebService-NextBigSound"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:HONDALLIC",
    "x_serialization_backend" : "JSON::PP version 2.27300"
