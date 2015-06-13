@@ -26,6 +26,12 @@ has 'http' => (
     },
 );
 
+has 'http_retry' => (
+    is => 'rw',
+    required => 1,
+    default => sub { 3 },
+);
+
 1;
 __END__
 

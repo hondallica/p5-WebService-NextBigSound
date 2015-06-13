@@ -13,6 +13,11 @@ subtest 'User-Agent' => sub {
     is $nbs->http->agent, 'YOUR_USER_AGENT', 'Change User-Agent';
 };
 
+subtest 'retry' => sub {
+    is $nbs->http_retry, 3;
+    $nbs->http_retry(666);
+    is $nbs->http_retry, 666;
+};
 
 done_testing;
 
