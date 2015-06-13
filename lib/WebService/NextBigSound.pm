@@ -11,6 +11,20 @@ use namespace::clean;
 our $VERSION = "0.01";
 
 
+$Net::DNS::Lite::CACHE = Cache::LRU->new( size => 10 );
+
+
+has 'http' => (
+    is => 'rw',
+    required => 1,
+    default  => sub {
+        Furl::HTTP->new(
+            inet_aton => \&Net::DNS::Lite::inet_aton,
+            agent => 'WebService::NextBigSound/' . $VERSION,
+            headers => [ 'Accept-Encoding' => 'gzip',],
+        );
+    },
+);
 
 1;
 __END__
