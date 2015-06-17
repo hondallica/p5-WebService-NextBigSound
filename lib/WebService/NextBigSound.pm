@@ -14,6 +14,12 @@ our $VERSION = "0.01";
 $Net::DNS::Lite::CACHE = Cache::LRU->new( size => 10 );
 
 
+has 'uri' => (
+    is => 'rw',
+    required => 1,
+    default => sub { new URI 'http://www.api3.nextbigsound.com' }
+);
+
 has 'http' => (
     is => 'rw',
     required => 1,
@@ -31,6 +37,27 @@ has 'http_retry' => (
     required => 1,
     default => sub { 3 },
 );
+
+
+sub _request {
+    my ($self, $param) = @_;
+
+    my %res = ( status => 666, content => '', );
+
+    map { $self->uri->query_param($_, []) } $self->uri->query_param;
+    $self->uri->query_form_hash($param);
+    $self->{request_uri} = $self->uri;
+
+    for (1..$self->{http_retry}) {
+        ($res{status}, $res{content}) = (
+            $self->http->request(method => 'GET', url => $self->uri)
+        )[1,4];
+        last if $res{status} == 200;
+    }
+
+    return $self->parse_json($res{content});
+
+}
 
 1;
 __END__
